@@ -2,10 +2,9 @@ import { useMemo, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { LogOut, Plus, Receipt, Search } from "lucide-react";
+import { Plus, Search } from "lucide-react";
 import { apiDelete, apiGet, apiPatch, ApiError } from "@/lib/api";
-import { endSession } from "@/lib/session";
-import { monthLabel } from "@/lib/format";
+import { AppHeader } from "@/components/AppHeader";
 import type { AuthStatus, Reminder, Riba } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -72,27 +71,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-3">
-            <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Receipt className="size-5" />
-            </span>
-            <div>
-              <p className="font-heading text-lg font-semibold leading-tight text-slate-900">RiBa &amp; Fatture</p>
-              <p className="text-xs text-slate-500" data-testid="current-month-label">{monthLabel(today)}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button data-testid="add-riba-button" onClick={openNew}>
-              <Plus className="size-4" /> Nuova RiBa
-            </Button>
-            <Button variant="ghost" size="icon" data-testid="logout-button" aria-label="Esci" onClick={() => endSession("/login")}>
-              <LogOut className="size-4" />
-            </Button>
-          </div>
-        </div>
-      </header>
+      <AppHeader today={today}>
+        <Button data-testid="add-riba-button" onClick={openNew}>
+          <Plus className="size-4" /> Nuova RiBa
+        </Button>
+      </AppHeader>
 
       <main className="mx-auto max-w-7xl px-6 py-8">
         <div className="mb-6">

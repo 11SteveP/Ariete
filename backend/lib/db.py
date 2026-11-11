@@ -23,6 +23,11 @@ INDEXES: dict[str, list[IndexModel]] = {
         IndexModel([("id", ASCENDING)], name="id", unique=True),
         IndexModel([("fatturata", ASCENDING), ("data_caricamento", ASCENDING)], name="fatturata_caricamento"),
         IndexModel([("data_caricamento", DESCENDING), ("created_at", DESCENDING)], name="caricamento_desc"),
+        IndexModel([("cliente_id", ASCENDING)], name="cliente_id"),
+    ],
+    "clienti": [
+        IndexModel([("id", ASCENDING)], name="id", unique=True),
+        IndexModel([("nome", ASCENDING)], name="nome"),
     ],
     "sessions": [IndexModel([("token", ASCENDING)], name="token", unique=True)],
 }

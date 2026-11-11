@@ -63,9 +63,10 @@ async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
-from routers import auth as auth_router, riba as riba_router
+from routers import auth as auth_router, riba as riba_router, clienti as clienti_router
 api_router.include_router(auth_router.router)
 api_router.include_router(riba_router.router)
+api_router.include_router(clienti_router.router)
 
 # Include the router in the main app
 app.include_router(api_router)

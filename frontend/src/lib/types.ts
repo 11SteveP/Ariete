@@ -5,9 +5,11 @@ export interface AuthStatus {
 
 export interface RibaInput {
   cliente: string;
+  cliente_id: string | null;
   importo: number;
   data_scadenza: string;
   data_caricamento: string;
+  mese_fattura: string; // YYYY-MM
   note: string;
 }
 
@@ -33,4 +35,17 @@ export interface Reminder {
   pending_total: number;
   overdue_count: number;
   items: Riba[];
+}
+
+// Mirrors backend/models/cliente.py
+export interface ClienteInput {
+  nome: string;
+  partita_iva: string;
+  email: string;
+  note: string;
+}
+
+export interface Cliente extends ClienteInput {
+  id: string;
+  created_at: string;
 }

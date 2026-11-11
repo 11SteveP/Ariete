@@ -16,7 +16,17 @@ def _to_riba(doc: dict) -> Riba:
     doc.pop("_id", None)
     if doc.get("created_at") and doc["created_at"].tzinfo is None:
         doc["created_at"] = doc["created_at"].replace(tzinfo=timezone.utc)
+    doc.setdefault("mese_fattura", doc["data_caricamento"][:7])  # legacy rows
     return Riba(**doc)
+
+
+async def _resolve_cliente(body: RibaInput) -> RibaInput:
+    if body.cliente_id:
+        cli = await db.clienti.find_one({"id": body.cliente_id})
+        if not cli:
+            raise HTTPException(status_code=400, detail="Cliente non trovato")
+        body.cliente = cli["nome"]
+    return body
 
 
 @router.get("", response_model=List[Riba])
@@ -27,6 +37,7 @@ async def list_riba():
 
 @router.post("", response_model=Riba, status_code=201)
 async def create_riba(body: RibaInput):
+    body = await _resolve_cliente(body)
     riba = Riba(**body.model_dump())
     await db.riba.insert_one(riba.model_dump())
     return riba
@@ -39,8 +50,9 @@ async def reminder():
     is_last_day = d == calendar.monthrange(y, m)[1]
     month = today[:7]
     pending = [_to_riba(doc) for doc in await db.riba.find({"fatturata": False}).sort("data_caricamento", 1).to_list(5000)]
-    overdue = [r for r in pending if r.data_caricamento[:7] < month]
-    items = [r for r in pending if r.data_caricamento[:7] <= month] if is_last_day else overdue
+    pending.sort(key=lambda r: (r.mese_fattura, r.data_caricamento))
+    overdue = [r for r in pending if r.mese_fattura < month]
+    items = [r for r in pending if r.mese_fattura <= month] if is_last_day else overdue
     return Reminder(
         today=today,
         is_last_day=is_last_day,
@@ -54,6 +66,7 @@ async def reminder():
 
 @router.put("/{id}", response_model=Riba)
 async def update_riba(id: str, body: RibaInput):
+    body = await _resolve_cliente(body)
     doc = await db.riba.find_one_and_update({"id": id}, {"$set": body.model_dump()}, return_document=True)
     if not doc:
         raise HTTPException(status_code=404, detail="RiBa non trovata")

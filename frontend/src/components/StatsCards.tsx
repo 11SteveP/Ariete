@@ -9,12 +9,12 @@ interface Props {
 export function StatsCards({ ribas, month }: Props) {
   const pending = ribas.filter((r) => !r.fatturata);
   const invoiced = ribas.filter((r) => r.fatturata);
-  const thisMonth = ribas.filter((r) => r.data_caricamento.startsWith(month));
+  const thisMonth = pending.filter((r) => r.mese_fattura === month);
   const sum = (list: Riba[]) => list.reduce((s, r) => s + r.importo, 0);
 
   const cards = [
     { id: "pending", label: "Da fatturare", value: pending.length, sub: formatCurrency(sum(pending)), cls: "border-amber-200 bg-amber-50/60", accent: "text-amber-800" },
-    { id: "month", label: "Caricate questo mese", value: thisMonth.length, sub: formatCurrency(sum(thisMonth)), cls: "border-slate-200 bg-white", accent: "text-slate-900" },
+    { id: "month", label: "Fatture da fare questo mese", value: thisMonth.length, sub: formatCurrency(sum(thisMonth)), cls: "border-slate-200 bg-white", accent: "text-slate-900" },
     { id: "invoiced", label: "Fatturate", value: invoiced.length, sub: formatCurrency(sum(invoiced)), cls: "border-emerald-200 bg-emerald-50/60", accent: "text-emerald-800" },
     { id: "total", label: "Totale RiBa", value: ribas.length, sub: formatCurrency(sum(ribas)), cls: "border-slate-200 bg-white", accent: "text-slate-900" },
   ];

@@ -1,6 +1,6 @@
 import { AlertTriangle, CalendarClock } from "lucide-react";
 import type { Reminder } from "@/lib/types";
-import { formatCurrency, formatDate } from "@/lib/format";
+import { formatCurrency, formatDate, monthLabel } from "@/lib/format";
 import { Button } from "@/components/ui/button";
 
 interface Props {
@@ -28,7 +28,7 @@ export function ReminderBanner({ reminder, onShowPending, onInvoice }: Props) {
           <div>
             <p className="font-heading text-lg font-semibold" data-testid="reminder-title">
               {overdueOnly
-                ? `${reminder.items.length} RiBa dei mesi scorsi ancora senza fattura`
+                ? `${reminder.items.length} RiBa con fattura prevista nei mesi scorsi ancora da emettere`
                 : `Oggi è l'ultimo giorno del mese: emetti le fatture!`}
             </p>
             <p className="text-sm opacity-90" data-testid="reminder-summary">
@@ -47,7 +47,7 @@ export function ReminderBanner({ reminder, onShowPending, onInvoice }: Props) {
             <div className="min-w-0">
               <p className="truncate font-semibold">{r.cliente}</p>
               <p className="text-xs opacity-80">
-                Caricata {formatDate(r.data_caricamento)} · <span className="font-mono">{formatCurrency(r.importo)}</span>
+                Fattura di {monthLabel(r.mese_fattura)} · Caricata {formatDate(r.data_caricamento)} · <span className="font-mono">{formatCurrency(r.importo)}</span>
               </p>
             </div>
             <Button size="xs" data-testid={`reminder-invoice-button-${r.id}`} onClick={() => onInvoice(r.id)}>

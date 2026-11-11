@@ -5,6 +5,7 @@ from typing import List, Optional
 from pydantic import BaseModel, Field
 
 DATE_RE = r"^\d{4}-\d{2}-\d{2}$"
+MONTH_RE = r"^\d{4}-\d{2}$"
 
 
 class PinLogin(BaseModel):
@@ -17,9 +18,11 @@ class AuthStatus(BaseModel):
 
 class RibaInput(BaseModel):
     cliente: str = Field(min_length=1, max_length=200)
+    cliente_id: Optional[str] = None
     importo: float = Field(gt=0)
     data_scadenza: str = Field(pattern=DATE_RE)
     data_caricamento: str = Field(pattern=DATE_RE)
+    mese_fattura: str = Field(pattern=MONTH_RE)  # YYYY-MM: month the invoice must be issued
     note: str = ""
 
 

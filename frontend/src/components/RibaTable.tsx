@@ -1,6 +1,6 @@
 import { FileCheck2, MoreHorizontal, Pencil, Trash2, Undo2 } from "lucide-react";
 import type { Riba } from "@/lib/types";
-import { formatCurrency, formatDate } from "@/lib/format";
+import { formatCurrency, formatDate, monthName } from "@/lib/format";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -24,6 +24,7 @@ export function RibaTable({ ribas, flagged, onInvoice, onUninvoice, onEdit, onDe
           <TableHead className="text-right">Importo</TableHead>
           <TableHead>Caricata il</TableHead>
           <TableHead>Scadenza</TableHead>
+          <TableHead>Fattura da fare a</TableHead>
           <TableHead>Fattura</TableHead>
           <TableHead className="pr-5 text-right">Azioni</TableHead>
         </TableRow>
@@ -42,6 +43,7 @@ export function RibaTable({ ribas, flagged, onInvoice, onUninvoice, onEdit, onDe
             <TableCell className="text-right font-mono font-medium text-slate-900" data-testid={`riba-importo-${r.id}`}>{formatCurrency(r.importo)}</TableCell>
             <TableCell className="text-slate-600">{formatDate(r.data_caricamento)}</TableCell>
             <TableCell className="text-slate-600">{formatDate(r.data_scadenza)}</TableCell>
+            <TableCell className="font-medium text-slate-800" data-testid={`riba-mese-fattura-${r.id}`}>{monthName(r.mese_fattura)}</TableCell>
             <TableCell data-testid={`riba-status-${r.id}`}>
               {r.fatturata ? (
                 <div>
