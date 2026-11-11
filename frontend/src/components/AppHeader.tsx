@@ -3,6 +3,7 @@ import { LogOut, Receipt } from "lucide-react";
 import { endSession } from "@/lib/session";
 import { monthLabel } from "@/lib/format";
 import { Button } from "@/components/ui/button";
+import { PinDialog } from "@/components/PinDialog";
 
 const NAV = [
   { to: "/", label: "Registro RiBa", testid: "nav-riba" },
@@ -43,6 +44,7 @@ export function AppHeader({ today, children }: { today: string; children?: React
         </div>
         <div className="flex items-center gap-2">
           {children}
+          <PinDialog />
           <Button variant="ghost" size="icon" data-testid="logout-button" aria-label="Esci" onClick={() => endSession("/login")}>
             <LogOut className="size-4" />
           </Button>

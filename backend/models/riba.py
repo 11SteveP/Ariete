@@ -12,6 +12,11 @@ class PinLogin(BaseModel):
     pin: str = Field(min_length=4, max_length=6)
 
 
+class PinChange(BaseModel):
+    current_pin: str = Field(min_length=4, max_length=6)
+    new_pin: str = Field(pattern=r"^\d{4,6}$")
+
+
 class AuthStatus(BaseModel):
     authenticated: bool
 

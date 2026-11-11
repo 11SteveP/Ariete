@@ -3,6 +3,11 @@ export interface AuthStatus {
   authenticated: boolean;
 }
 
+export interface PinChange {
+  current_pin: string;
+  new_pin: string;
+}
+
 export interface RibaInput {
   cliente: string;
   cliente_id: string | null;

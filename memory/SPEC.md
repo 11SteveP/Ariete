@@ -4,6 +4,7 @@ App personale (italiano) per registrare le RiBa caricate in banca e ricordare di
 
 ## Auth
 - Single-user PIN (env `APP_PIN` in backend/.env, default `1234`). POST /api/auth/login {pin} sets httpOnly cookie `riba_session` (sessions collection). GET /api/auth/me → 401 if not logged. POST /api/auth/logout.
+- POST /api/auth/pin {current_pin, new_pin (4-6 digits)} (auth required): saves PBKDF2 hash in `settings` {key:'pin'} which then overrides APP_PIN; wrong current → 400; logs out all other sessions. UI: key icon in header → "Modifica PIN" dialog.
 - Frontend: `/login` PIN page; `/` dashboard redirects to /login on 401.
 
 ## Data model (collection `riba`)
