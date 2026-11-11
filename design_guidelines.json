@@ -1,0 +1,177 @@
+{
+  "project_name": "RiBa Remind & Invoicing Tracker (RiBa & Fatture)",
+  "app_type": "saas_app",
+  "theme_strategy": {
+    "default_mode": "light",
+    "mode_toggle": true,
+    "archetype": "ORGANIC & EARTHY / FINANCIAL PRECISION (Alpine Emerald & Warm Slate)",
+    "aesthetic_description": "Clean Italian financial utility combining precision accounting clarity with warm stone tones and rich alpine emerald accents. Emphasizes peace of mind against missed month-end invoices."
+  },
+  "entry_surfaces": {
+    "/": "split hero and PIN gate — clean financial positioning left with key metric teasers, tactile 4-to-6 digit PIN entry card on the right",
+    "/dashboard": "financial command center — top urgent month-end reminder banner, summary KPI widgets, search and filter tabs, structured RiBa ledger data table with action drawer"
+  },
+  "typography": {
+    "font_family_heading": "Outfit, sans-serif",
+    "font_family_body": "Plus Jakarta Sans, sans-serif",
+    "font_family_mono": "JetBrains Mono, monospace",
+    "font_source_import": "@import \"@fontsource-variable/plus-jakarta-sans\";\n@import \"@fontsource-variable/outfit\";\n@import \"@fontsource-variable/jetbrains-mono\";",
+    "scale_px": {
+      "display": 52,
+      "h1": 36,
+      "h2": 28,
+      "h3": 20,
+      "body": 16,
+      "caption": 14
+    },
+    "rules": {
+      "headings": "font-heading font-semibold tracking-tight text-slate-900 dark:text-slate-100",
+      "body": "font-sans text-base text-slate-700 dark:text-slate-300 leading-relaxed tracking-normal",
+      "mono_numbers": "font-mono font-medium tracking-tight text-slate-900 dark:text-slate-100",
+      "overline_labels": "text-xs font-semibold uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400"
+    }
+  },
+  "colors": {
+    "surfaces": [
+      {
+        "name": "page",
+        "kind": "solid",
+        "bg": "#F8FAFC",
+        "on_bg": "#0F172A",
+        "on_bg_muted": "#475569",
+        "roles": {
+          "link": "#0F766E",
+          "error": "#BE123C",
+          "success": "#047857",
+          "warning": "#B45309"
+        }
+      },
+      {
+        "name": "panel",
+        "kind": "solid",
+        "bg": "#FFFFFF",
+        "on_bg": "#0F172A",
+        "on_bg_muted": "#64748B",
+        "roles": {
+          "border": "#E2E8F0",
+          "hover": "#F1F5F9"
+        }
+      },
+      {
+        "name": "banner_urgent",
+        "kind": "solid",
+        "bg": "#FFFBEB",
+        "on_bg": "#78350F",
+        "on_bg_muted": "#92400E",
+        "roles": {
+          "border": "#FDE68A",
+          "accent_badge": "#D97706"
+        }
+      },
+      {
+        "name": "banner_overdue",
+        "kind": "solid",
+        "bg": "#FFF1F2",
+        "on_bg": "#881337",
+        "on_bg_muted": "#9F1239",
+        "roles": {
+          "border": "#FECDD3",
+          "accent_badge": "#E11D48"
+        }
+      },
+      {
+        "name": "card_stat_pending",
+        "kind": "solid",
+        "bg": "#F0FDF4",
+        "on_bg": "#14532D",
+        "on_bg_muted": "#166534"
+      },
+      {
+        "name": "page_dark",
+        "kind": "solid",
+        "bg": "#090D16",
+        "on_bg": "#F8FAFC",
+        "on_bg_muted": "#94A3B8",
+        "roles": {
+          "link": "#2DD4BF",
+          "error": "#FB7185",
+          "success": "#34D399",
+          "warning": "#FBBF24"
+        }
+      },
+      {
+        "name": "panel_dark",
+        "kind": "solid",
+        "bg": "#131C2E",
+        "on_bg": "#F8FAFC",
+        "on_bg_muted": "#94A3B8",
+        "roles": {
+          "border": "#1E293B",
+          "hover": "#1E293B"
+        }
+      }
+    ],
+    "accent": "#0F766E",
+    "on_accent": "#FFFFFF",
+    "accent_secondary": "#B45309",
+    "on_accent_secondary": "#FFFFFF"
+  },
+  "grids_and_layouts": {
+    "dashboard_grid": "grid grid-cols-1 md:grid-cols-12 gap-6 items-start",
+    "kpi_bar": "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6",
+    "table_container": "bg-white dark:bg-[#131C2E] rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden",
+    "banner_layout": "rounded-xl border p-5 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all duration-200"
+  },
+  "motion": {
+    "transitions": "transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease",
+    "modal_animation": "scale-[0.98] to scale-100 with opacity fade (200ms ease-out)",
+    "banner_pulse": "subtle ring highlight for urgent end-of-month reminders"
+  },
+  "accessibility": {
+    "contrast_standard": "WCAG AA (minimum 4.5:1 for all body & data text, 3:1 for large headers)",
+    "keyboard_navigation": "Full tab order with visible ring-2 ring-teal-600 focus outlines on inputs, buttons, and table action triggers",
+    "aria_roles": "aria-live for reminder banner counts, aria-describedby on form validation inputs"
+  },
+  "component_paths": {
+    "pin_screen": "/app/frontend/src/pages/PinLogin.tsx",
+    "dashboard_page": "/app/frontend/src/pages/Home.tsx",
+    "reminder_banner": "/app/frontend/src/components/ReminderBanner.tsx",
+    "riba_table": "/app/frontend/src/components/RibaTable.tsx",
+    "riba_modal": "/app/frontend/src/components/RibaDialog.tsx",
+    "invoice_modal": "/app/frontend/src/components/MarkInvoiceDialog.tsx",
+    "stats_overview": "/app/frontend/src/components/StatsCards.tsx"
+  },
+  "key_features_and_business_logic": {
+    "language": "Italian (it-IT formatting for dates: dd/MM/yyyy and currency: € #.##0,00)",
+    "pin_authentication": "4 to 6 digit security PIN stored securely in localStorage / session cookie, with quick unlock, reset PIN option, and instant auth check",
+    "end_of_month_reminder": {
+      "trigger_condition": "Active on the last 3 calendar days of the current month OR if there are RiBa from previous months still missing invoices ('da fatturare')",
+      "behavior": "Sticky/prominent alert banner at top of dashboard with count, total sum da fatturare, quick 1-click filter button 'Vedi Da Fatturare', and direct 'Segna Fattura' actions"
+    },
+    "riba_attributes": [
+      "id (string)",
+      "cliente (string, required)",
+      "importo (number, currency)",
+      "data_scadenza (string ISO, date)",
+      "data_caricamento_banca (string ISO, date)",
+      "stato_fattura (boolean: true if fattura emessa, false if da fatturare)",
+      "numero_fattura (string, optional/when fatturata)",
+      "data_fattura (string ISO, optional)",
+      "note (string, optional)",
+      "created_at (string ISO)"
+    ],
+    "filter_tabs": [
+      {"id": "all", "label": "Tutte le RiBa"},
+      {"id": "pending", "label": "Da Fatturare (Richiede Azione)"},
+      {"id": "invoiced", "label": "Fatturate"}
+    ],
+    "export_or_quick_actions": "Instant search by cliente, quick status toggle, edit modal, delete confirmation, and export to CSV/print"
+  },
+  "instructions_to_main_agent": [
+    "Language MUST be entirely in Italian (labels, buttons, placeholder texts, validation messages, toast notifications).",
+    "Use formatCurrency helper for Italian currency format (e.g. 1.250,50 €).",
+    "Ensure end-of-month banner logic accurately checks: (1) if today is within the last days of the month (e.g. today >= 28th), OR (2) if any pending RiBa has data_caricamento_banca or data_scadenza from a previous month.",
+    "Add 'data-testid' to all buttons, inputs, filter tabs, stats cards, and action items (e.g. data-testid='add-riba-btn', data-testid='pin-input', data-testid='tab-da-fatturare', data-testid='reminder-banner').",
+    "Ensure the UI uses the clean Outfit + Plus Jakarta Sans font pairing and robust, high-contrast Tailwind classes with full dark mode support."
+  ]
+}
